@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rehabilitation Gaming System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #4CAF50;
+            color: white;
+            text-align: center;
+            padding: 1rem;
+        }
+        main {
+            margin: 20px;
+        }
+        .login-container, .game-container, .results-container {
+            border: 1px solid #ccc;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            background: white;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 3px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Rehabilitation Gaming System</h1>
+    </header>
+    <main>
+        <!-- Login Section -->
+        <div class="login-container">
+            <h2>Login</h2>
+            <form>
+                <label for="username">Username:</label><br>
+                <input type="text" id="username" name="username" required><br><br>
+                <label for="password">Password:</label><br>
+                <input type="password" id="password" name="password" required><br><br>
+                <button type="submit">Login</button>
+            </form>
+        </div>
+
+        <!-- Game Section -->
+        <div class="game-container">
+            <h2>Game Interface</h2>
+            <p>Navigate the maze to reach the goal while answering questions. Avoid obstacles!</p>
+            <canvas id="gameCanvas" width="500" height="300" style="border:1px solid #000;"></canvas>
+            <button onclick="startGame()">Start Game</button>
+        </div>
+
+        <!-- Results Section -->
+        <div class="results-container">
+            <h2>Results</h2>
+            <p>Game scores and progress will appear here.</p>
+            <p>Score: <span id="score">0</span></p>
+        </div>
+    </main>
+
+    <script>
+        function startGame() {
+            alert("Game started! This is where the game logic would be implemented.");
+        }
+    </script>
+</body>
+</html>
