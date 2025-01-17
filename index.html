@@ -5,199 +5,116 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Simple Rehabilitation Game</title>
     <style>
+        /* Global Styles */
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
+            background: linear-gradient(to bottom, #1a73e8, #0041a8);
+            color: white;
             overflow: hidden;
-            background-color: #f4f4f9;
-        }
-
-        /* Fullscreen Popup */
-        #popup {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: #f4f4f9;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            z-index: 10;
-        }
-
-        .circle-container {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            opacity: 0;
-            animation: fadeIn 2s forwards, moveCircles 4s 2s infinite alternate;
-        }
-
-        .circle {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .circle img {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 2px solid #4CAF50;
-        }
-
-        .circle span {
-            margin-top: 5px;
-            font-size: 12px;
-            color: #333;
-        }
-
-        #popup-footer {
-            margin-top: 20px;
-            font-size: 16px;
-            color: #555;
-        }
-
-        @keyframes fadeIn {
-            0% {
-                opacity: 0;
-            }
-            100% {
-                opacity: 1;
-            }
-        }
-
-        @keyframes moveCircles {
-            0% {
-                transform: translateX(0);
-            }
-            100% {
-                transform: translateX(50px);
-            }
-        }
-
-        /* Main Content */
-        #main-content {
-            display: none;
         }
 
         header {
-            background-color: #4CAF50;
-            color: white;
             text-align: center;
             padding: 1rem;
+            background: linear-gradient(to right, #0041a8, #1a73e8);
+            color: white;
         }
 
         main {
-            margin: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
         }
 
-        .game-container {
-            text-align: center;
-        }
-
+        /* Game Canvas */
         canvas {
-            border: 1px solid #000;
-            background-color: #fff;
+            border: 2px solid white;
+            background-color: white;
         }
 
-        .results-container {
-            text-align: center;
+        /* Control Buttons */
+        .controls {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 10px;
             margin-top: 20px;
         }
 
-        button {
-            background-color: #4CAF50;
+        .controls button {
+            padding: 10px;
+            font-size: 16px;
+            font-weight: bold;
             color: white;
+            background: linear-gradient(to bottom, #1a73e8, #0041a8);
             border: none;
-            padding: 10px 20px;
+            border-radius: 5px;
             cursor: pointer;
-            border-radius: 3px;
-            margin-top: 20px;
         }
 
-        button:hover {
-            background-color: #45a049;
+        .controls button:hover {
+            background: linear-gradient(to bottom, #0041a8, #1a73e8);
+        }
+
+        /* Results Section */
+        .results {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .results span {
+            font-size: 24px;
+            font-weight: bold;
         }
     </style>
 </head>
 <body>
-    <!-- Popup -->
-    <div id="popup">
-        <div class="circle-container">
-            <div class="circle">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-bAGaN632lWQ0C-_JciqIBako_lM8Nps7XcP4rhiMUvuujzlQA8OL4LM&s=10" alt="Circle 1">
-                <span>JFM Bright Future</span>
-            </div>
-            <div class="circle">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-bAGaN632lWQ0C-_JciqIBako_lM8Nps7XcP4rhiMUvuujzlQA8OL4LM&s=10" alt="Circle 2">
-                <span>Daffa</span>
-            </div>
-            <div class="circle">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-bAGaN632lWQ0C-_JciqIBako_lM8Nps7XcP4rhiMUvuujzlQA8OL4LM&s=10" alt="Circle 3">
-                <span>Cetta</span>
-            </div>
-            <div class="circle">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-bAGaN632lWQ0C-_JciqIBako_lM8Nps7XcP4rhiMUvuujzlQA8OL4LM&s=10" alt="Circle 4">
-                <span>Prina</span>
-            </div>
-            <div class="circle">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-bAGaN632lWQ0C-_JciqIBako_lM8Nps7XcP4rhiMUvuujzlQA8OL4LM&s=10" alt="Circle 5">
-                <span>Anggie</span>
-            </div>
-            <div class="circle">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-bAGaN632lWQ0C-_JciqIBako_lM8Nps7XcP4rhiMUvuujzlQA8OL4LM&s=10" alt="Circle 6">
-                <span>Awfa</span>
-            </div>
-        </div>
-        <div id="popup-footer">Dibuat oleh نحن</div>
-    </div>
+    <header>
+        <h1>Simple Rehabilitation Game</h1>
+    </header>
+    <main>
+        <!-- Game Section -->
+        <canvas id="gameCanvas" width="500" height="400"></canvas>
 
-    <!-- Main Content -->
-    <div id="main-content">
-        <header>
-            <h1>Simple Rehabilitation Game</h1>
-        </header>
-        <main>
-            <div class="game-container">
-                <h2>Game</h2>
-                <p>Move the square to collect the yellow coins. Use arrow keys to move!</p>
-                <canvas id="gameCanvas" width="500" height="400"></canvas>
-            </div>
-            <div class="results-container">
-                <h2>Results</h2>
-                <p>Score: <span id="score">0</span></p>
-                <button onclick="restartGame()">Restart Game</button>
-            </div>
-        </main>
-    </div>
+        <!-- Controls Section -->
+        <div class="controls">
+            <button onclick="movePlayer('up')">Up</button>
+            <button onclick="movePlayer('left')">Left</button>
+            <button onclick="movePlayer('down')">Down</button>
+            <button></button>
+            <button onclick="movePlayer('right')">Right</button>
+        </div>
+
+        <!-- Results Section -->
+        <div class="results">
+            <p>Score: <span id="score">0</span></p>
+            <button onclick="restartGame()">Restart Game</button>
+        </div>
+    </main>
 
     <script>
-        // Hide popup after animation
-        setTimeout(() => {
-            document.getElementById('popup').style.display = 'none';
-            document.getElementById('main-content').style.display = 'block';
-            document.body.style.overflow = 'auto';
-        }, 7000); // Duration of animation + delay
-
+        // Initialize Canvas
         const canvas = document.getElementById('gameCanvas');
         const ctx = canvas.getContext('2d');
-        const scoreDisplay = document.getElementById('score');
 
-        let player = { x: 20, y: 20, size: 20, color: 'blue' };
+        // Player and Coin Data
+        let player = { x: 20, y: 20, size: 20, color: '#1a73e8' };
         let coin = { x: 200, y: 200, size: 15, color: 'yellow' };
         let score = 0;
-        const moveSpeed = 5;
+        const moveSpeed = 10;
 
+        // Display Score
+        const scoreDisplay = document.getElementById('score');
+
+        // Draw Player
         function drawPlayer() {
             ctx.fillStyle = player.color;
             ctx.fillRect(player.x, player.y, player.size, player.size);
         }
 
+        // Draw Coin
         function drawCoin() {
             ctx.fillStyle = coin.color;
             ctx.beginPath();
@@ -205,6 +122,7 @@
             ctx.fill();
         }
 
+        // Check Collision
         function checkCollision() {
             const dx = player.x + player.size / 2 - coin.x;
             const dy = player.y + player.size / 2 - coin.y;
@@ -213,15 +131,19 @@
             if (distance < player.size / 2 + coin.size) {
                 score++;
                 scoreDisplay.textContent = score;
+
+                // Move coin to a new random position
                 coin.x = Math.random() * (canvas.width - coin.size * 2) + coin.size;
                 coin.y = Math.random() * (canvas.height - coin.size * 2) + coin.size;
             }
         }
 
+        // Clear Canvas
         function clearCanvas() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
         }
 
+        // Game Loop
         function gameLoop() {
             clearCanvas();
             drawPlayer();
@@ -230,23 +152,25 @@
             requestAnimationFrame(gameLoop);
         }
 
-        function movePlayer(e) {
-            switch (e.key) {
-                case 'ArrowUp':
+        // Move Player
+        function movePlayer(direction) {
+            switch (direction) {
+                case 'up':
                     if (player.y > 0) player.y -= moveSpeed;
                     break;
-                case 'ArrowDown':
+                case 'down':
                     if (player.y + player.size < canvas.height) player.y += moveSpeed;
                     break;
-                case 'ArrowLeft':
+                case 'left':
                     if (player.x > 0) player.x -= moveSpeed;
                     break;
-                case 'ArrowRight':
+                case 'right':
                     if (player.x + player.size < canvas.width) player.x += moveSpeed;
                     break;
             }
         }
 
+        // Restart Game
         function restartGame() {
             player.x = 20;
             player.y = 20;
@@ -254,9 +178,7 @@
             scoreDisplay.textContent = score;
         }
 
-        document.addEventListener('keydown', movePlayer);
-
-        // Start the game loop
+        // Start Game Loop
         gameLoop();
     </script>
 </body>
