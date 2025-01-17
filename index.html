@@ -3,80 +3,222 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rehabilitation Gaming System</title>
+    <title>JFM Bright Future</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f9;
             margin: 0;
-            padding: 0;
+            font-family: Arial, sans-serif;
+            overflow: hidden;
         }
-        header {
-            background-color: #4CAF50;
-            color: white;
-            text-align: center;
-            padding: 1rem;
+
+        /* Fullscreen Popup */
+        #popup {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #f4f4f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            z-index: 10;
         }
-        main {
-            margin: 20px;
+
+        /* Animating Circles */
+        .circle-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            opacity: 0;
+            animation: fadeIn 2s forwards, moveCircles 4s 2s infinite alternate;
         }
-        .login-container, .game-container, .results-container {
-            border: 1px solid #ccc;
-            padding: 15px;
-            border-radius: 5px;
-            margin-bottom: 20px;
-            background: white;
+
+        .circle {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
-        button {
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            cursor: pointer;
-            border-radius: 3px;
+
+        .circle img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #4CAF50;
         }
-        button:hover {
-            background-color: #45a049;
+
+        .circle span {
+            margin-top: 5px;
+            font-size: 12px;
+            color: #333;
+        }
+
+        /* Footer */
+        #popup-footer {
+            margin-top: 20px;
+            font-size: 16px;
+            color: #555;
+        }
+
+        /* Fade-in Animation */
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        /* Move Circles Left and Right */
+        @keyframes moveCircles {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(50px);
+            }
+        }
+
+        /* Main Content */
+        #main-content {
+            display: none;
         }
     </style>
 </head>
 <body>
-    <header>
-        <h1>Rehabilitation Gaming System</h1>
-    </header>
-    <main>
-        <!-- Login Section -->
-        <div class="login-container">
-            <h2>Login</h2>
-            <form>
-                <label for="username">Username:</label><br>
-                <input type="text" id="username" name="username" required><br><br>
-                <label for="password">Password:</label><br>
-                <input type="password" id="password" name="password" required><br><br>
-                <button type="submit">Login</button>
-            </form>
+    <!-- Popup -->
+    <div id="popup">
+        <div class="circle-container">
+            <div class="circle">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-bAGaN632lWQ0C-_JciqIBako_lM8Nps7XcP4rhiMUvuujzlQA8OL4LM&s=10" alt="Circle 1">
+                <span>JFM Bright Future</span>
+            </div>
+            <div class="circle">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-bAGaN632lWQ0C-_JciqIBako_lM8Nps7XcP4rhiMUvuujzlQA8OL4LM&s=10" alt="Circle 2">
+                <span>Daffa</span>
+            </div>
+            <div class="circle">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-bAGaN632lWQ0C-_JciqIBako_lM8Nps7XcP4rhiMUvuujzlQA8OL4LM&s=10" alt="Circle 3">
+                <span>Cetta</span>
+            </div>
+            <div class="circle">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-bAGaN632lWQ0C-_JciqIBako_lM8Nps7XcP4rhiMUvuujzlQA8OL4LM&s=10" alt="Circle 4">
+                <span>Prina</span>
+            </div>
+            <div class="circle">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-bAGaN632lWQ0C-_JciqIBako_lM8Nps7XcP4rhiMUvuujzlQA8OL4LM&s=10" alt="Circle 5">
+                <span>Anggie</span>
+            </div>
+            <div class="circle">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-bAGaN632lWQ0C-_JciqIBako_lM8Nps7XcP4rhiMUvuujzlQA8OL4LM&s=10" alt="Circle 6">
+                <span>Awfa</span>
+            </div>
         </div>
+        <div id="popup-footer">Dibuat oleh نحن</div>
+    </div>
 
-        <!-- Game Section -->
-        <div class="game-container">
-            <h2>Game Interface</h2>
-            <p>Navigate the maze to reach the goal while answering questions. Avoid obstacles!</p>
-            <canvas id="gameCanvas" width="500" height="300" style="border:1px solid #000;"></canvas>
-            <button onclick="startGame()">Start Game</button>
-        </div>
-
-        <!-- Results Section -->
-        <div class="results-container">
-            <h2>Results</h2>
-            <p>Game scores and progress will appear here.</p>
-            <p>Score: <span id="score">0</span></p>
-        </div>
-    </main>
+    <!-- Main Content -->
+    <div id="main-content">
+        <header>
+            <h1>Simple Rehabilitation Game</h1>
+        </header>
+        <main>
+            <div class="game-container">
+                <h2>Game</h2>
+                <p>Move the square to collect the yellow coins. Use arrow keys to move!</p>
+                <canvas id="gameCanvas" width="500" height="400"></canvas>
+            </div>
+            <div class="results-container">
+                <h2>Results</h2>
+                <p>Score: <span id="score">0</span></p>
+                <button onclick="restartGame()">Restart Game</button>
+            </div>
+        </main>
+    </div>
 
     <script>
-        function startGame() {
-            alert("Game started! This is where the game logic would be implemented.");
+        // Hide popup after animation
+        setTimeout(() => {
+            document.getElementById('popup').style.display = 'none';
+            document.getElementById('main-content').style.display = 'block';
+            document.body.style.overflow = 'auto';
+        }, 7000); // Duration of animation + delay
+
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+        const scoreDisplay = document.getElementById('score');
+
+        let player = { x: 20, y: 20, size: 20, color: 'blue' };
+        let coin = { x: 200, y: 200, size: 15, color: 'yellow' };
+        let score = 0;
+        const moveSpeed = 5;
+
+        function drawPlayer() {
+            ctx.fillStyle = player.color;
+            ctx.fillRect(player.x, player.y, player.size, player.size);
         }
+
+        function drawCoin() {
+            ctx.fillStyle = coin.color;
+            ctx.beginPath();
+            ctx.arc(coin.x, coin.y, coin.size, 0, Math.PI * 2);
+            ctx.fill();
+        }
+
+        function checkCollision() {
+            const dx = player.x + player.size / 2 - coin.x;
+            const dy = player.y + player.size / 2 - coin.y;
+            const distance = Math.sqrt(dx * dx + dy * dy);
+
+            if (distance < player.size / 2 + coin.size) {
+                score++;
+                scoreDisplay.textContent = score;
+                coin.x = Math.random() * (canvas.width - coin.size * 2) + coin.size;
+                coin.y = Math.random() * (canvas.height - coin.size * 2) + coin.size;
+            }
+        }
+
+        function clearCanvas() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+        }
+
+        function gameLoop() {
+            clearCanvas();
+            drawPlayer();
+            drawCoin();
+            checkCollision();
+            requestAnimationFrame(gameLoop);
+        }
+
+        function movePlayer(e) {
+            switch (e.key) {
+                case 'ArrowUp':
+                    if (player.y > 0) player.y -= moveSpeed;
+                    break;
+                case 'ArrowDown':
+                    if (player.y + player.size < canvas.height) player.y += moveSpeed;
+                    break;
+                case 'ArrowLeft':
+                    if (player.x > 0) player.x -= moveSpeed;
+                    break;
+                case 'ArrowRight':
+                    if (player.x + player.size < canvas.width) player.x += moveSpeed;
+                    break;
+            }
+        }
+
+        function restartGame() {
+            player.x = 20;
+            player.y = 20;
+            score = 0;
+            scoreDisplay.textContent = score;
+        }
+
+        document.addEventListener('keydown', movePlayer);
+        gameLoop();
     </script>
 </body>
 </html>
